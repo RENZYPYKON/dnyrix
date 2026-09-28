@@ -66,6 +66,15 @@ function renderNoFirebaseState() {
   heroCount.textContent = "0 Files";
 }
 
+function normalizeStatus(status) {
+  if (!status) return "Updated";
+  const clean = String(status).trim();
+  if (clean.toLowerCase() === "under maintenance" || clean.toLowerCase() === "maintenance") return "Maintenance";
+  if (clean.toLowerCase() === "soon") return "Soon";
+  if (clean.toLowerCase() === "expired") return "Expired";
+  return "Updated";
+}
+
 function renderFiles() {
   const visibleFiles = getVisibleFiles();
 
@@ -73,6 +82,7 @@ function renderFiles() {
     ...file,
     name: file.name || "Unnamed File",
     type: (file.type || "").toUpperCase() || "FILE",
+    status: normalizeStatus(file.status),
     sizeFormatted: file.sizeFormatted || file.size || "Unknown size",
     version: file.version || "",
     description: file.description || "",
@@ -108,11 +118,17 @@ function renderFiles() {
           ? `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 2h4v3h3v3h-3v3h-4V8H7V5h3V2Zm-2 9h8v9H8v-9Zm2 2v2h4v-2h-4Zm1 3h2v2h-2v-2Z"/></svg>`
           : `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h8l5 5v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Zm7 1.5V8h3.5L14 4.5Zm-6 6.5h10v2H8v-2Zm0 4h10v2H8v-2Z"/></svg>`;
 
+      const statusLabel = file.status || "Updated";
+      const statusClass = statusLabel.toLowerCase().replace(/\s+/g, "-");
+
       return `
         <article class="file-card" aria-label="${file.name} ${fileType} archive">
           <div class="file-header">
             <div class="file-icon" aria-hidden="true">${iconMarkup}</div>
-            <span class="file-badge">${fileType}</span>
+            <div class="file-badges">
+              <span class="file-badge">${fileType}</span>
+              <span class="status-badge status-${statusClass}">${statusLabel}</span>
+            </div>
           </div>
 
           <h3>${file.name}</h3>
@@ -177,6 +193,7 @@ function loadPublicFiles() {
           ...file,
           name: file.name || "Unnamed File",
           type: (file.type || "").toUpperCase(),
+          status: normalizeStatus(file.status),
           sizeFormatted: file.sizeFormatted || file.size || "Unknown size",
           downloadURL: file.downloadURL || "#"
         }));

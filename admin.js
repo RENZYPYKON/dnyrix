@@ -26,6 +26,7 @@ const archiveFileRow = archiveFileInput.closest(".form-row");
 const displayNameInput = document.getElementById("displayNameInput");
 const originalNameInput = document.getElementById("originalNameInput");
 const typeInput = document.getElementById("typeInput");
+const statusInput = document.getElementById("statusInput");
 const sizeInput = document.getElementById("sizeInput");
 const versionInput = document.getElementById("versionInput");
 const descriptionInput = document.getElementById("descriptionInput");
@@ -132,6 +133,7 @@ function resetAddDownloadForm() {
   archiveFileRow.style.display = "";
   if (archiveFileInput) archiveFileInput.value = "";
   if (typeInput) typeInput.value = "";
+  if (statusInput) statusInput.value = "Updated";
   if (displayNameInput) displayNameInput.value = "";
   if (originalNameInput) originalNameInput.value = "";
   if (sizeInput) {
@@ -259,21 +261,31 @@ function renderAdminFiles() {
   publishedCount.textContent = String(publishedTotal);
 
   adminFileList.innerHTML = state.files
-    .map((file) => `
-      <div class="file-item" data-file-id="${file.id}">
-        <div class="file-item-main">
-          <strong>${file.name}</strong>
-          <div class="file-meta-inline">
-            ${file.type || "FILE"} • ${file.size || "Unknown size"} • ${file.version || "v1.0"} • ${file.uploadedAt ? formatTimestamp(file.uploadedAt) : "Recently"}
+    .map((file) => {
+      const status = (file.status || "Updated").trim();
+      const statusClass = status.toLowerCase() === "under maintenance" || status.toLowerCase() === "maintenance"
+        ? "maintenance"
+        : status.toLowerCase();
+
+      return `
+        <div class="file-item" data-file-id="${file.id}">
+          <div class="file-item-main">
+            <div style="display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap; margin-bottom:0.4rem;">
+              <strong>${file.name}</strong>
+              <span class="admin-status-pill ${statusClass}">${status}</span>
+            </div>
+            <div class="file-meta-inline">
+              ${file.type || "FILE"} • ${file.size || "Unknown size"} • ${file.version || "v1.0"} • ${file.uploadedAt ? formatTimestamp(file.uploadedAt) : "Recently"}
+            </div>
+          </div>
+
+          <div class="file-actions">
+            <button class="action-btn edit-file" type="button" data-id="${file.id}">Edit</button>
+            <button class="action-btn delete delete-file" type="button" data-id="${file.id}">Delete</button>
           </div>
         </div>
-
-        <div class="file-actions">
-          <button class="action-btn edit-file" type="button" data-id="${file.id}">Edit</button>
-          <button class="action-btn delete delete-file" type="button" data-id="${file.id}">Delete</button>
-        </div>
-      </div>
-    `)
+      `;
+    })
     .join("");
 
   document.querySelectorAll(".delete-file").forEach((button) => {
@@ -311,6 +323,7 @@ function renderAdminFiles() {
       displayNameInput.value = file.name || "";
       originalNameInput.value = file.originalName || "";
       typeInput.value = (file.type || "").toUpperCase();
+      statusInput.value = file.status || "Updated";
       sizeInput.value = file.size || "";
       versionInput.value = file.version || "";
       descriptionInput.value = file.description || "";
@@ -489,6 +502,7 @@ async function handleAddDownload(event) {
     name: displayNameInput.value.trim(),
     originalName: originalNameInput.value.trim(),
     type: (typeInput.value || "ZIP").trim().toUpperCase(),
+    status: (statusInput.value || "Updated").trim(),
     size: sizeInput.value.trim(),
     version: versionInput.value.trim(),
     description: descriptionInput.value.trim(),
@@ -517,6 +531,7 @@ async function handleAddDownload(event) {
         name: payload.name,
         originalName: payload.originalName,
         type: payload.type,
+        status: payload.status,
         size: payload.size,
         version: payload.version,
         description: payload.description || "No description provided.",
@@ -535,6 +550,7 @@ async function handleAddDownload(event) {
       name: payload.name,
       originalName: payload.originalName,
       type: payload.type,
+      status: payload.status,
       size: payload.size,
       version: payload.version,
       description: payload.description || "No description provided.",

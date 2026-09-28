@@ -456,6 +456,14 @@ h1 {
   fill: var(--text);
 }
 
+.file-badges {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
 .file-badge {
   padding: 0.38rem 0.62rem;
   border-radius: 999px;
@@ -465,6 +473,40 @@ h1 {
   font-size: 0.73rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+.status-badge {
+  padding: 0.38rem 0.62rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.status-updated {
+  background: rgba(84, 233, 157, 0.12);
+  border-color: rgba(84, 233, 157, 0.32);
+  color: #baf7d4;
+}
+
+.status-soon {
+  background: rgba(255, 196, 84, 0.12);
+  border-color: rgba(255, 196, 84, 0.32);
+  color: #ffd978;
+}
+
+.status-expired {
+  background: rgba(255, 103, 103, 0.12);
+  border-color: rgba(255, 103, 103, 0.3);
+  color: #ffb1b1;
+}
+
+.status-maintenance {
+  background: rgba(157, 167, 255, 0.12);
+  border-color: rgba(157, 167, 255, 0.28);
+  color: #d3d9ff;
 }
 
 .file-card h3 {

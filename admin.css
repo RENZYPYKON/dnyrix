@@ -269,6 +269,42 @@
   border: 1px solid var(--border);
 }
 
+.admin-status-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.28rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+}
+
+.admin-status-pill.updated {
+  background: rgba(84, 233, 157, 0.12);
+  border-color: rgba(84, 233, 157, 0.32);
+  color: #baf7d4;
+}
+
+.admin-status-pill.soon {
+  background: rgba(255, 196, 84, 0.12);
+  border-color: rgba(255, 196, 84, 0.32);
+  color: #ffd978;
+}
+
+.admin-status-pill.expired {
+  background: rgba(255, 103, 103, 0.12);
+  border-color: rgba(255, 103, 103, 0.3);
+  color: #ffb1b1;
+}
+
+.admin-status-pill.maintenance {
+  background: rgba(157, 167, 255, 0.12);
+  border-color: rgba(157, 167, 255, 0.28);
+  color: #d3d9ff;
+}
+
 .file-item-main {
   display: flex;
   flex-direction: column;
