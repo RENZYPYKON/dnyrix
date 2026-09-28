@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Dnyrix logo">
+  <defs>
+    <linearGradient id="dnyrix-favicon" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="50%" stop-color="#f4f4f4"/>
+      <stop offset="100%" stop-color="#d8d8d8"/>
+    </linearGradient>
+  </defs>
+  <g fill="url(#dnyrix-favicon)" stroke="rgba(255,255,255,0.75)" stroke-width="1.5" stroke-linejoin="round">
+    <path d="M64 99C55 76 48 59 42 42C31 29 18 19 12 22C6 26 9 38 17 49C26 62 38 72 58 89L64 99Z"/>
+    <path d="M64 99C73 76 80 59 86 42C97 29 110 19 116 22C122 26 119 38 111 49C102 62 90 72 70 89L64 99Z"/>
+    <path d="M64 101C57 86 54 72 48 57C42 42 35 30 29 25C35 21 42 22 49 29C56 37 60 47 64 60L64 101Z"/>
+    <path d="M64 101C71 86 74 72 80 57C86 42 93 30 99 25C93 21 86 22 79 29C72 37 68 47 64 60L64 101Z"/>
+    <path d="M64 62C54 51 47 37 45 21C53 27 58 37 64 49C70 37 75 27 83 21C81 37 74 51 64 62Z"/>
+    <path d="M64 64C64 49 64 35 64 20C66 35 66 49 64 64Z"/>
+    <path d="M34 97C29 103 29 112 35 116C41 111 41 101 34 97Z"/>
+    <path d="M94 97C99 103 99 112 93 116C87 111 87 101 94 97Z"/>
+    <path d="M64 64C58 72 58 83 60 96C62 83 62 72 64 64Z"/>
+  </g>
+</svg>
