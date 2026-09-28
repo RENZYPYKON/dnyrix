@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Dnyrix is a personal download hub for ZIP and RAR files." />
+    <meta property="og:title" content="Dnyrix — Personal File Hub" />
+    <meta property="og:description" content="Dnyrix is a personal download hub for ZIP and RAR files." />
+    <meta property="og:type" content="website" />
+    <title>Dnyrix — Personal File Hub</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page-glow glow-one" aria-hidden="true"></div>
+    <div class="page-glow glow-two" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <nav class="nav container" aria-label="Main navigation">
+        <a href="#home" class="brand" aria-label="Dnyrix home">
+          <span class="brand-mark" aria-hidden="true">D</span>
+          <span class="brand-text">DNYRIX</span>
+        </a>
+
+        <div class="nav-links" aria-label="Navigation links">
+          <a href="#home" class="nav-link active">Home</a>
+          <a href="#downloads" class="nav-link">Downloads</a>
+          <a href="#about" class="nav-link">About</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section id="home" class="hero container">
+        <div class="hero-content">
+          <span class="eyebrow">ZIP &amp; RAR FILES</span>
+          <h1>Your Files. One Place.</h1>
+          <p>
+            A simple and secure personal hub for downloading Dnyrix files.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#downloads" class="primary-btn">Browse Downloads</a>
+          </div>
+        </div>
+
+        <div class="hero-panel glass-panel" aria-label="File hub overview">
+          <div class="panel-row">
+            <span class="panel-label">Available</span>
+            <strong id="heroCount">0 Files</strong>
+          </div>
+          <div class="panel-row">
+            <span class="panel-label">Formats</span>
+            <strong>ZIP · RAR</strong>
+          </div>
+          <div class="panel-row">
+            <span class="panel-label">Status</span>
+            <strong>Ready</strong>
+          </div>
+        </div>
+      </section>
+
+      <section id="downloads" class="downloads container" aria-labelledby="downloads-title">
+        <div class="section-header">
+          <div>
+            <p class="section-kicker">Collection</p>
+            <h2 id="downloads-title">Downloads</h2>
+          </div>
+          <span id="fileCount" class="count-pill" aria-live="polite">0 Files Available</span>
+        </div>
+
+        <p class="section-subtitle">Browse available files and download them instantly.</p>
+
+        <div class="toolbar" aria-label="Search and filter downloads">
+          <label class="search-wrap" for="searchInput">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M10.5 3a7.5 7.5 0 0 1 5.88 12.8l4.4 4.4 1.4-1.4-4.4-4.4A7.5 7.5 0 1 1 10.5 3Zm0 2a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11Z"/>
+            </svg>
+            <input
+              id="searchInput"
+              type="search"
+              placeholder="Search files..."
+              aria-label="Search files"
+            />
+          </label>
+        </div>
+
+        <div class="filter-group" role="tablist" aria-label="Filter files by type">
+          <button class="filter-btn active" type="button" data-filter="All" aria-pressed="true">All</button>
+          <button class="filter-btn" type="button" data-filter="ZIP" aria-pressed="false">ZIP</button>
+          <button class="filter-btn" type="button" data-filter="RAR" aria-pressed="false">RAR</button>
+        </div>
+
+        <div id="fileGrid" class="file-grid" aria-live="polite"></div>
+      </section>
+
+      <section id="about" class="about container" aria-labelledby="about-title">
+        <div class="about-panel glass-panel">
+          <p class="section-kicker">About</p>
+          <h2 id="about-title">About Dnyrix</h2>
+          <p>
+            Dnyrix is a personal file hub designed to keep downloadable ZIP and RAR archives organized in one clean and simple place.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <button class="admin-access" type="button" aria-label="Open Dnyrix admin" data-admin-link="admin.html">
+        <span aria-hidden="true">⚙</span>
+      </button>
+      <p>© 2026 Dnyrix. All rights reserved.</p>
+      <p>Built for simple file sharing.</p>
+    </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+    <script src="firebase/firebase-config.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

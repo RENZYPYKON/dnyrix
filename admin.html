@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Dnyrix admin dashboard for file management." />
+    <title>Dnyrix Admin</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="admin.css" />
+  </head>
+  <body class="admin-body">
+    <div class="page-glow glow-one" aria-hidden="true"></div>
+    <div class="page-glow glow-two" aria-hidden="true"></div>
+
+    <div id="loginPage" class="auth-shell">
+      <div class="auth-card glass-panel">
+        <div class="auth-header">
+          <span class="brand-mark" aria-hidden="true">D</span>
+          <h1>DNYRIX</h1>
+        </div>
+
+        <p class="auth-subtitle">Admin Dashboard Access</p>
+
+        <form id="loginForm" class="auth-form" novalidate>
+          <label class="field-label" for="emailInput">Email</label>
+          <div class="input-wrap">
+            <input id="emailInput" type="email" name="email" placeholder="you@example.com" autocomplete="email" required />
+          </div>
+
+          <label class="field-label" for="passwordInput">Password</label>
+          <div class="input-wrap password-wrap">
+            <input id="passwordInput" type="password" name="password" placeholder="••••••••" autocomplete="current-password" required />
+            <button type="button" class="toggle-password" aria-label="Show password">👁</button>
+          </div>
+
+          <div id="loginError" class="form-error" aria-live="polite"></div>
+
+          <button id="loginButton" class="primary-btn auth-btn" type="submit">
+            <span class="btn-label">Login</span>
+          </button>
+        </form>
+
+        <a href="index.html" class="back-link">← Back to Dnyrix</a>
+      </div>
+    </div>
+
+    <div id="dashboardPage" class="dashboard-page hidden">
+      <header class="dashboard-header container">
+        <div>
+          <p class="section-kicker">Admin</p>
+          <h1>DNYRIX ADMIN</h1>
+        </div>
+
+        <div class="header-actions">
+          <span id="currentAdminEmail" class="admin-email">Not signed in</span>
+          <button id="logoutButton" class="secondary-btn" type="button">Logout</button>
+        </div>
+      </header>
+
+      <main class="dashboard container">
+        <section class="top-stats">
+          <div class="stat-card glass-panel">
+            <span class="stat-label">Total files</span>
+            <strong id="adminFileCount">0</strong>
+          </div>
+          <div class="stat-card glass-panel">
+            <span class="stat-label">Published</span>
+            <strong id="publishedCount">0</strong>
+          </div>
+          <div class="stat-card glass-panel">
+            <span class="stat-label">Logged in</span>
+            <strong id="adminStatus">Ready</strong>
+          </div>
+        </section>
+
+        <section class="dashboard-toolbar glass-panel">
+          <div>
+            <p class="section-kicker">Management</p>
+            <h2>File Management</h2>
+          </div>
+          <button id="openUploadModal" class="primary-btn" type="button">+ Add Download</button>
+        </section>
+
+        <section class="dashboard-list">
+          <div class="list-header">
+            <h3>FILES</h3>
+          </div>
+          <div id="adminFileList" class="admin-file-list" aria-live="polite"></div>
+        </section>
+      </main>
+    </div>
+
+    <div id="uploadModal" class="modal hidden" aria-hidden="true">
+      <div class="modal-backdrop" data-close-modal="true"></div>
+      <div class="modal-card glass-panel" role="dialog" aria-modal="true" aria-labelledby="uploadModalTitle">
+        <div class="modal-header">
+          <h3 id="uploadModalTitle">Add Download</h3>
+          <button class="modal-close" type="button" aria-label="Close upload modal">×</button>
+        </div>
+
+        <p class="modal-note">The archive must be uploaded to a GitHub Release manually. This form only stores the file metadata and public release links.</p>
+
+        <form id="uploadForm" class="upload-form" novalidate>
+          <div class="form-section">
+            <h4>File Information</h4>
+
+            <div class="form-row">
+              <label for="archiveFileInput" class="field-label">Archive File</label>
+              <input id="archiveFileInput" type="file" accept=".zip,.rar,application/zip,application/x-rar-compressed" />
+              <p class="field-help">Optional — used to automatically detect file name, type, and size. The file is not uploaded to Dnyrix.</p>
+            </div>
+
+            <div class="form-row">
+              <label for="displayNameInput" class="field-label">File Display Name</label>
+              <input id="displayNameInput" type="text" placeholder="Enter file name" />
+            </div>
+
+            <div class="form-row">
+              <label for="originalNameInput" class="field-label">Original File Name</label>
+              <input id="originalNameInput" type="text" placeholder="example.zip" />
+            </div>
+
+            <div class="form-row">
+              <label for="typeInput" class="field-label">File Type</label>
+              <select id="typeInput">
+                <option value="">Select file type</option>
+                <option value="ZIP">ZIP</option>
+                <option value="RAR">RAR</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <label for="sizeInput" class="field-label">File Size</label>
+              <input id="sizeInput" type="text" placeholder="Size unavailable — enter manually" />
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h4>Release Information</h4>
+
+            <div class="form-row">
+              <label for="versionInput" class="field-label">Version</label>
+              <input id="versionInput" type="text" placeholder="e.g. 1.0.0" />
+            </div>
+
+            <div class="form-row">
+              <label for="descriptionInput" class="field-label">Description</label>
+              <textarea id="descriptionInput" rows="3" placeholder="Enter a short description"></textarea>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h4>GitHub Release</h4>
+
+            <div class="form-row">
+              <label for="downloadUrlInput" class="field-label">GitHub Download URL</label>
+              <input id="downloadUrlInput" type="url" placeholder="https://github.com/username/repository/releases/download/..." />
+            </div>
+
+            <div class="form-row">
+              <label for="releaseUrlInput" class="field-label">GitHub Release URL</label>
+              <input id="releaseUrlInput" type="url" placeholder="https://github.com/username/repository/releases/tag/..." />
+            </div>
+          </div>
+
+          <div id="uploadMessage" class="form-message" aria-live="polite"></div>
+
+          <div class="modal-actions">
+            <button type="button" class="secondary-btn" data-close-modal="true">Cancel</button>
+            <button type="submit" class="primary-btn">Add Download</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+    <script src="firebase/firebase-config.js"></script>
+    <script src="admin.js"></script>
+  </body>
+</html>
