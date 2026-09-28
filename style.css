@@ -537,6 +537,41 @@ h1 {
   font-size: 0.8rem;
 }
 
+.description-wrap {
+  position: relative;
+  z-index: 1;
+  margin: 0.85rem 0 1rem;
+}
+
+.file-description {
+  margin: 0;
+  color: var(--text-soft);
+  line-height: 1.55;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.file-description.expanded {
+  display: block;
+  -webkit-line-clamp: unset;
+  overflow: visible;
+}
+
+.description-toggle {
+  margin-top: 0.45rem;
+  border: none;
+  background: transparent;
+  color: #dfe8ff;
+  padding: 0;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+
 .download-btn {
   position: relative;
   z-index: 1;

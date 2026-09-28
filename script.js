@@ -144,7 +144,12 @@ function renderFiles() {
             ${file.uploadedAt ? `<span>${formatTimeStamp(file.uploadedAt)}</span>` : ""}
           </div>
 
-          ${file.description ? `<p class="file-description">${file.description}</p>` : ""}
+          ${file.description ? `
+            <div class="description-wrap">
+              <p class="file-description">${file.description}</p>
+              <button type="button" class="description-toggle" aria-expanded="false">See more</button>
+            </div>
+          ` : ""}
 
           <a class="download-btn" href="${file.downloadURL || '#'}" target="_blank" rel="noopener" download aria-label="Download ${file.name}">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v10.6l3.6-3.6 1.4 1.4-5.9 5.9-5.9-5.9 1.4-1.4L11 13.6V3h1Zm-8 16h16v2H4v-2Z"/></svg>
@@ -154,6 +159,19 @@ function renderFiles() {
       `;
     })
     .join("");
+
+  document.querySelectorAll(".description-toggle").forEach((button) => {
+    button.addEventListener("click", () => {
+      const container = button.closest(".description-wrap");
+      const description = container?.querySelector(".file-description");
+      if (!container || !description) return;
+
+      const expanded = button.getAttribute("aria-expanded") === "true";
+      button.setAttribute("aria-expanded", String(!expanded));
+      description.classList.toggle("expanded", !expanded);
+      button.textContent = expanded ? "See more" : "Show less";
+    });
+  });
 
   document.querySelectorAll(".download-btn").forEach((button) => {
     button.addEventListener("click", () => {
