@@ -106,6 +106,7 @@ function detectArchiveTypeFromName(fileName) {
   const lowerName = fileName.toLowerCase();
   if (lowerName.endsWith(".zip")) return "ZIP";
   if (lowerName.endsWith(".rar")) return "RAR";
+  if (lowerName.endsWith(".apk")) return "APK";
   return "";
 }
 
@@ -201,13 +202,13 @@ function validateDownloadForm(data) {
   }
 
   const type = (data.type || "").toUpperCase();
-  if (!["ZIP", "RAR"].includes(type)) {
+  if (!["ZIP", "RAR", "APK"].includes(type)) {
     throw new Error("Please select a valid file type.");
   }
 
   const originalLower = (data.originalName || "").toLowerCase();
-  if (!originalLower.endsWith(".zip") && !originalLower.endsWith(".rar")) {
-    throw new Error("Only ZIP and RAR files are supported.");
+  if (!originalLower.endsWith(".zip") && !originalLower.endsWith(".rar") && !originalLower.endsWith(".apk")) {
+    throw new Error("Only ZIP, RAR, and APK files are supported.");
   }
 
   if (!data.size || !data.size.trim() || /^Size unavailable/i.test(data.size.trim())) {
@@ -452,7 +453,7 @@ archiveFileInput.addEventListener("change", async () => {
   const detectedType = detectArchiveTypeFromName(fileName);
 
   if (!detectedType) {
-    showNotification("Only ZIP and RAR files are supported.", "error");
+    showNotification("Only ZIP, RAR, and APK files are supported.", "error");
     archiveFileInput.value = "";
     return;
   }

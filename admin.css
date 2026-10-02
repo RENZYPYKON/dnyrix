@@ -77,6 +77,7 @@
 #displayNameInput,
 #originalNameInput,
 #typeInput,
+#statusInput,
 #sizeInput,
 #versionInput,
 #descriptionInput,
@@ -105,17 +106,31 @@
 }
 
 #typeInput,
+#statusInput,
 #archiveFileInput {
   appearance: none;
   -webkit-appearance: none;
 }
 
-#typeInput {
+#typeInput,
+#statusInput {
   background-image: linear-gradient(45deg, transparent 50%, rgba(255,255,255,0.7) 50%), linear-gradient(135deg, rgba(255,255,255,0.7) 50%, transparent 50%);
   background-position: calc(100% - 18px) calc(50% - 2px), calc(100% - 12px) calc(50% - 2px);
   background-size: 6px 6px, 6px 6px;
   background-repeat: no-repeat;
   padding-right: 2.5rem;
+}
+
+#typeInput,
+#statusInput {
+  color-scheme: dark;
+  cursor: pointer;
+}
+
+#typeInput option,
+#statusInput option {
+  background: #101216;
+  color: #f5f7fb;
 }
 
 #archiveFileInput {
@@ -125,6 +140,7 @@
 #displayNameInput:focus,
 #originalNameInput:focus,
 #typeInput:focus,
+#statusInput:focus,
 #sizeInput:focus,
 #versionInput:focus,
 #descriptionInput:focus,
